@@ -9,7 +9,7 @@ function App() {
     	<div className="image pt-5 pe-4 d-flex justify-content-center">
 				<div className="border w-80 border-1 d-flex ps-4 pt-4 relative rounded border-dark">
 					<div className="w-30 center-y">
-						<h2>ЛУЧШИЕ МЕНТОРЫ ПО ВСЕМ НАПРЕВЛЕНИЯМ</h2>
+						<h2>ЛУЧШИЕ МЕНТОРЫ ПО ВСЕМ НАПwРЕВЛЕНИЯМ</h2>
 					</div>
 					<div className="justify-content-end w-100 d-flex pe-4">
 					<img className="me-4" src=	"/img/image.png" />
