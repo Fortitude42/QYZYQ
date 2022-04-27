@@ -1,6 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Register from "./components/Pages/Register/Register";
+import App from './App';
+import {BrowserRouter} from 'react-router-dom';
 
-ReactDOM.render(  <Register />,
+ReactDOM.render(  
+<BrowserRouter>
+	<App />
+</BrowserRouter>,
+
 document.getElementById('root'));
