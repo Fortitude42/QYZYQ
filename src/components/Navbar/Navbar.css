@@ -1,0 +1,13 @@
+.brand-name {
+    font-family: Geneva, Tahoma, Verdana, sans-serif;
+    font-weight: bold;
+}
+
+.center {
+    margin: auto;
+    text-align: center;
+}
+
+svg {
+    /*margin-left+ 5px;*/
+}
