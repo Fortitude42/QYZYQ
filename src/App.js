@@ -4,9 +4,9 @@ import './App.css'
 import './components/Navbar/Navbar.css'
 import { Routes, Route} from "react-router-dom";
 import Navbar from './components/Navbar/Navbar';
-import Home from './components/Pages/Home/Home';
-import Login from './components/Pages/Login/Login.jsx'
-import Register from './components/Pages/Register/Register.jsx'
+import Home from './Pages/Home/Home.jsx';
+import Login from './Pages/Login/Login.jsx'
+import Register from './Pages/Register/Register.jsx'
 
 
 export default class App extends Component {	
