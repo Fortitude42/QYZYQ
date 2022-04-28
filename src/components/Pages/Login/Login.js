@@ -20,7 +20,7 @@ function LoginForm() {
             <button>Login</button>
 
             {failed ? <p className='failedLog'> Email or password is incorrect!  </p> : null}
-            <p className='message'>Not registered? <a href='#'>Create an account</a></p>
+            <p className='message'>Not registered? <a href='/register'>Create an account</a></p>
         </form>
     );
 }

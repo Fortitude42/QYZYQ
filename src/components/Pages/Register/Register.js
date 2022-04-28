@@ -25,7 +25,7 @@ function RegisterForm() {
             <input type='password' placeholder='Password Confirmation' onChange = {e => setDetail({...detail, password_confirm: e.target.value})} value={detail.password_confirm} />
             <button>Register</button>
             {password_confirmed === 0 ? <p className='failedReg'> Passwords does not match </p> : null}
-            <p className='message'>Alredy Registrated? <a href='#'>Sign in</a></p>
+            <p className='message'>Alredy Registrated? <a href='/login'>Sign in</a></p>
         </form>
     );
 }
