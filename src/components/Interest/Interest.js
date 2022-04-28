@@ -1,0 +1,22 @@
+import React, { Component } from "react";
+import './Interest.css';
+
+
+
+export default class Interest extends Component {
+	constructor(props){
+		super(props);	
+		this.state = {
+			interest: props.interest,
+		}
+	}
+
+	render() {
+		return (
+			<div className="border border-1 border-dark rounded ps-2 pe-2 h-300">
+				<img height={220} width={220} src="/img/sample.webp"/>
+				<h4 className="text-center">{this.state.interest.name}</h4>
+			</div>
+		)
+	}
+}
