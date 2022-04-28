@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import 'bootstrap/dist/css/bootstrap.css';	
-import Interest from "../../Interest/Interest";
+import Interest from "../../components/Interest/Interest";
 import './Home.css'
 
 
