@@ -15,15 +15,12 @@ export default class Home extends Component {
 
 	componentDidMount() {
 		axios.get('http://localhost:5000/interests/')
-			.then(response => {
-				console.log(response.data);
-				this.setState({interests: response.data});
-			})
+			.then(response =>	this.setState({interests: response.data}))
 			.catch((error) => console.log(error))		
 	}
 
 	interestList() {
-		const res = []
+		let res = []
 		for (let i = 0; i < this.state.interests.length; i += 4) {
 			let currentRow = [];
 			for (let j = 0; j < 4 && i + j < this.state.interests.length; ++j)
@@ -31,10 +28,13 @@ export default class Home extends Component {
 
 			res.push(
 				<div className="d-flex justify-content-center">
-					{currentRow.map(inter =>
-						<div className="w-20 ms-4 mb-4">
-							<Interest interest={inter}/>
-						</div>)
+					{currentRow.map(inter => {
+						let path = "/interests/" + inter._id;
+						return (
+							<a href={path} className="w-20 ms-4 mb-4 text-dark t-d-n">
+								<Interest interest={inter}/>
+							</a>)
+					})
 					}
 				</div>
 			)

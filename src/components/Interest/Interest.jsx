@@ -13,7 +13,7 @@ export default class Interest extends Component {
 
 	render() {
 		return (
-			<div className="border border-1 border-dark rounded ps-2">
+			<div className="border border-1 border-dark rounded ps-2 h-300">
 				<div className="d-flex justify-content-center">
 					<img height={220} width={220} src="/img/sample.webp"/>
 				</div>
