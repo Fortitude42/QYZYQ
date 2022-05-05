@@ -1,4 +1,3 @@
-import { toHaveAccessibleDescription } from '@testing-library/jest-dom/dist/matchers';
 import React, { Component } from 'react';
 import './Interest.css';
 
@@ -25,4 +24,3 @@ export default class Interest extends Component {
 		);
 	}
 }
-

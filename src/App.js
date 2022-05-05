@@ -9,6 +9,7 @@ import Login from './Pages/Login/Login.jsx'
 import Register from './Pages/Register/Register.jsx'
 import Interest from "./Pages/Interest/Interest";
 import axios from "axios";
+import CreateInterest from './Pages/Create-Interest/CreateInterest'
 
 
 export default class App extends Component {	
@@ -23,7 +24,7 @@ export default class App extends Component {
 		let res = []
 		for (let inter of this.state.interests) {
 			let path = "/interests/" + inter._id;
-			res.push(<Route path={path} element={<Interest interest={inter} />}/>)
+			res.push(<Route key= {path} path={path} element={<Interest interest={inter} />}/>)
 		}
 
 		return res;
@@ -39,11 +40,12 @@ export default class App extends Component {
 
 		return (
 			<div>
-				<Navbar/>
+				<Navbar/>				
 				<Routes>
-					<Route path="/home" element={<Home />} />
-					<Route path="/login" element={<Login />}/>
-					<Route path="/register" element={<Register	 />}/>
+					<Route path="/home" element={<Home />} key={'home'} />
+					<Route path="/login" element={<Login />} key = 'login'/>
+					<Route path="/register" element={<Register />} key = 'register' />
+					<Route path="/create-interest" element={<CreateInterest	/>} key='create-interest' />
 					{this.interestList()}
 				</Routes>
 			</div>
