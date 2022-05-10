@@ -51,12 +51,14 @@ export default class CreateInterest extends Component {
 		if (this.state.nameError.length > 0 || this.state.typeError.length > 0 || this.state.descriptionError.length > 0)
 			return;
 
-
-		axios.post('http://localhost:5000/interests/add', {
-			name: this.state.name,
-			description: this.state.description,			
-			type: this.state.type,			
-		}).then(response => {
+		const formData = new FormData();
+		formData.append('name', this.state.name);
+		formData.append('type', this.state.type);
+		formData.append('description', this.state.description);		
+		formData.append('image', this.state.image);
+		
+		
+		axios.post('http://localhost:5000/interests/add', formData).then(response => {
 			console.log(response.data);
 		}).catch((error) => console.log(error));
 	}
@@ -105,7 +107,7 @@ export default class CreateInterest extends Component {
 
 					<div className="mt-4">
 						<label htmlFor="formFile" className="form-label">Choose a picture</label>
-						<input className="form-control" type="file" id="formFile" onChange={this.handleImageChange} accept="image/png, image/jpeg"/>
+						<input className="form-control" name="image" type="file" id="formFile" onChange={this.handleImageChange} accept="image/png, image/jpeg"/>
 					</div>
 				</div>
 
