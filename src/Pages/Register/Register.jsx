@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import axios from "axios";
+import React, { useEffect, useState } from 'react';
 import './Register.css'
+import {registerUser} from '../../services/auth.js'
+import {useNavigate} from 'react-router-dom'
 
 
 function RegisterForm() {
-    const [password_confirmed, toConfirm] = useState(1);
     const [detail, setDetail] = useState({
         first_name: "",
         last_name: "",
@@ -12,6 +12,8 @@ function RegisterForm() {
         password: "",
         password_confirm: "",
     });
+
+    const navigate = useNavigate();
 
     function isVaild(detail){
         if(detail.first_name.length == 0)
@@ -30,17 +32,18 @@ function RegisterForm() {
         e.preventDefault();
         if (!isVaild(detail))
             return;
-        
-        axios.post('http://localhost:5000/users/add', {
-            firstname: detail.first_name,
-            lastname: detail.last_name,
-            email: detail.email,
-            password: detail.password
-        }).then(response => {
-            console.log(response.data);
-        })
-        .catch((error) => console.log(error));
+        registerUser(detail);
     };
+
+    useEffect(() => {
+        fetch("http://localhost:5000/users/isUserAuth", {
+            headers: {
+                "x-access-token": localStorage.getItem("token")
+            }
+        })
+        .then(res => res.json())
+        .then(data => data.isLoggedIn ? navigate("/home") : null);
+    })
       
     return (
         <form className='login-form' onSubmit={submitHandler}>
