@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useLayoutEffect} from 'react';
+import { loginUser, logoutUser } from '../../Services/Auth.js'
+import { useNavigate } from 'react-router-dom'
+import { isLogged } from '../../Services/UserInfo.js';
 import './Login.css'
-import {loginUser} from '../../services/auth.js'
-import {useNavigate} from 'react-router-dom'
 
 function LoginForm() {
     const [detail, setDetail] = useState({
@@ -11,19 +12,19 @@ function LoginForm() {
     const [failed, Failed] = useState(0);
     const navigate = useNavigate();
     
-    const submitHandler = e => {
+    const submitHandler = async(e) => {
         e.preventDefault();
-        loginUser(detail);
+        await loginUser(detail);
+        if (await isLogged())
+            navigate('/home')
     };
 
     useEffect(() => {
-        fetch("http://localhost:5000/users/isUserAuth", {
-            headers: {
-                "x-access-token": localStorage.getItem("token")
-            }
-        })
-        .then(res => res.json())
-        .then(data => data.isLoggedIn ? navigate("/home") : null);  
+        const goHomeIfLogged = async() => {
+            if (await isLogged())
+                navigate('/home')
+        }
+        goHomeIfLogged();
     })
 
     return (

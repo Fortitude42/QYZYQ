@@ -29,7 +29,7 @@ async function loginUser(detail){
         const data = await res.json()
         localStorage.setItem("token", data.token)
         console.log(data.token);
-        console.log("Succesfullt saved");
+        console.log("Succesfully saved");
     } catch(err) {
         console.log("Error: " + err);
     }
