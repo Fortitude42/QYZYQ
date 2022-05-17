@@ -1,6 +1,7 @@
 const router = require('express').Router();
 let User = require('../models/user.model');
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 
 router.route('/').get((req, res) => {
 	User.find()
@@ -9,9 +10,9 @@ router.route('/').get((req, res) => {
 })
 
 
-router.route('/register').post((req, res) => {
+router.route('/register').post(async (req, res) => {
 	const newUser = new User(req.body);	
-
+	newUser.password = await bcrypt.hash(req.body.password, 10);
 	newUser.save()
 		.then(() => res.json('User added'))
 		.catch(err => res.status(400).json('Error: ' + err));
@@ -27,28 +28,30 @@ router.route('/login').post((req, res) => {
 			if(!dbUser){
 				return res.json('Invalid email or password')
 			}
-			
-			if(dbUser.password == userLoggingIn.password){
-				const payload = {
-					id: dbUser._id,
-					firstName: dbUser.firstname,
-					lastName: dbUser.lastname
-				};
-				jwt.sign(
-					payload,
-					secretWord,
-					{expiresIn: secondsInDay}, 
-					(err, token) => {
-						if(err) return res.status(400).json('Error: ' + err);
-						return res.json({
-							message: "Success",
-							token: "Bearer " + token,
-						});
-					}
-				);
-			}else{
-				return res.json('Invalid email or password');
-			}
+			bcrypt.compare(userLoggingIn.password, dbUser.password)			
+			.then(isCorrect => {
+				if(isCorrect){
+					const payload = {
+						id: dbUser._id,
+						firstName: dbUser.firstname,
+						lastName: dbUser.lastname
+					};
+					jwt.sign(
+						payload,
+						secretWord,
+						{expiresIn: secondsInDay}, 
+						(err, token) => {
+							if(err) return res.status(400).json('Error: ' + err);
+							return res.json({
+								message: "Success",
+								token: "Bearer " + token,
+							});
+						}
+					);
+				}else{
+					return res.json('Invalid email or password');
+				}
+			})
 		})
 })
 
