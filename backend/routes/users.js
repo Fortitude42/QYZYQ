@@ -33,8 +33,8 @@ router.route('/login').post((req, res) => {
 				if(isCorrect){
 					const payload = {
 						id: dbUser._id,
-						firstName: dbUser.firstname,
-						lastName: dbUser.lastname
+						firstName: dbUser.firstName,
+						lastName: dbUser.lastName
 					};
 					jwt.sign(
 						payload,

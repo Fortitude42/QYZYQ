@@ -1,4 +1,4 @@
-import { registerUser } from '../../Services/Auth.js'
+import { loginUser, registerUser } from '../../Services/Auth.js'
 import { useNavigate } from 'react-router-dom';
 import { isLogged } from '../../Services/UserInfo.js';
 import React, { useEffect, useState } from 'react';
@@ -33,7 +33,13 @@ function RegisterForm() {
         e.preventDefault();
         if (!isVaild(detail))
             return;
-        registerUser(detail);
+        registerUser(detail)
+        .then(res => {
+            if(res.data == "User added"){
+                loginUser(detail);
+                navigate("/home");
+            }
+        })
     };
 
     useEffect(() => {
