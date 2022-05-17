@@ -4,8 +4,8 @@ const API_URL = "http://localhost:5000/users";
 
 function registerUser(detail) {    
     return axios.post(API_URL + "/register", {
-        firstname: detail.firstName,
-        lastname: detail.lastName,
+        firstName: detail.firstName,
+        lastName: detail.lastName,
         email: detail.email,
         password: detail.password
     });
@@ -27,7 +27,6 @@ async function loginUser(detail){
         })
         const data = await res.json()
         localStorage.setItem("token", data.token)
-        console.log(data.token);
         console.log("Succesfully saved");
     } catch(err) {
         console.log("Error: " + err);
