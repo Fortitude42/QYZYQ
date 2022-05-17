@@ -2,11 +2,10 @@ import axios from "axios";
 
 const API_URL = "http://localhost:5000/users";
 
-function registerUser(detail) {
-    alert(detail);
+function registerUser(detail) {    
     return axios.post(API_URL + "/register", {
-        firstname: detail.first_name,
-        lastname: detail.last_name,
+        firstname: detail.firstName,
+        lastname: detail.lastName,
         email: detail.email,
         password: detail.password
     });
