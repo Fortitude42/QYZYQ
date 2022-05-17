@@ -8,6 +8,7 @@ import Home from './Pages/Home/Home.jsx';
 import Login from './Pages/Login/Login.jsx'
 import Register from './Pages/Register/Register.jsx'
 import Interest from "./Pages/Interest/Interest";
+import User from "./Pages/User/User";
 import axios from "axios";
 import CreateInterest from './Pages/Create-Interest/CreateInterest'
 
@@ -17,6 +18,7 @@ export default class App extends Component {
 		super(props);
 		this.state = {
 			interests: [],
+			users: [],
 		}
 	}
 
@@ -30,11 +32,27 @@ export default class App extends Component {
 		return res;
 	}
 	
+	usersList() {
+		let res = []
+		for (let user of this.state.users) {
+			let path = "/users/" + user._id;
+			res.push(<Route key= {path} path={path} element={<User user={user} />}/>)
+		}
+
+		return res;
+	}
+
 	componentDidMount() {
 		axios.get('http://localhost:5000/interests/')
 			.then(response =>	this.setState({interests: response.data}))
 			.catch((error) => console.log(error))		
+		
+		axios.get('http://localhost:5000/users/')
+			.then(response =>	this.setState({users: response.data}))
+			.catch((error) => console.log(error))
 	}
+
+
 
 	render() {
 
@@ -50,6 +68,7 @@ export default class App extends Component {
 					<Route path="/register" element={<Register />} key = 'register' />
 					<Route path="/create-interest" element={<CreateInterest	/>} key='create-interest' />
 					{this.interestList()}
+					{this.usersList()}
 				</Routes>
 			</div>
 		)
