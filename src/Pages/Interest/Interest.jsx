@@ -17,6 +17,7 @@ export default class Interest extends Component {
 				</div>
 				<div className="ms-4 border border-1 rounded border-dark ps-4 pe-4 w-50">
 					<h1 className="mt-4">{this.state.interest.name}</h1>
+					<h5>Author: {this.state.interest.author}</h5>					
 					<h3>About {this.state.interest.type}</h3>
 					<span className='break'> {this.state.interest.description}</span>
 				</div>

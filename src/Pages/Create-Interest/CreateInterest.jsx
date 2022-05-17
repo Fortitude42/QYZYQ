@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 function CreateInterest() {	
 	const [interest, setInterest] = useState({
 		name: '',
+		author: '',
 		type: 'Type',
 		description: '',
 		image: null
@@ -13,6 +14,7 @@ function CreateInterest() {
 	
 	const [errorMessage, setErrorMessage] = useState({
 		name: '',
+		author: '',
 		type: '',
 		description: '',
 	})	
@@ -23,6 +25,10 @@ function CreateInterest() {
 
 	function handleNameChange(event) {				
 		setInterest({...interest, name: event.target.value})
+	}
+	
+	function handleAuthorChange(event) {				
+		setInterest({...interest, author: event.target.value})
 	}
 
 	function handleDescriptionChange(event) {		
@@ -39,19 +45,22 @@ function CreateInterest() {
 
 
 	function handleSubmit(event) {
-		event.preventDefault();		
-						
-		setErrorMessage({...errorMessage, name: interest.name.length === 0 ? 'Name should not be empty' : ''})
-		setErrorMessage({...errorMessage, description: interest.description.length === 0 ? 'Description should not be empty' : ''})
-		setErrorMessage({...errorMessage, type: interest.type === 'Type' ? 'Choose a type' : ''})
-		
-		
+		event.preventDefault();
 
-		if (errorMessage.name.length > 0 || errorMessage.type.length > 0 || errorMessage.description.length > 0)
-			return;
+		setErrorMessage({
+			name: interest.name.length === 0 ? 'Name should not be empty' : '',
+			author: interest.author.length === 0 ? 'Author should not be empty' : '',
+			description: interest.description.length === 0 ? 'Description should not be empty' : '',
+			type: interest.type === 'Type' ? 'Choose a type' : ''
+		})		
+		
+				
+		if (interest.name.length === 0 || interest.author.length === 0 || interest.description.length === 0 || errorMessage.type.length === 'Type')
+			return;		
 
 		const formData = new FormData();
 		formData.append('name', interest.name);
+		formData.append('author', interest.author);
 		formData.append('type', interest.type);
 		formData.append('description', interest.description);		
 		formData.append('image', interest.image);		
@@ -72,6 +81,16 @@ function CreateInterest() {
 					<p className='position-absolute text-danger'>
 						<small>
 							{errorMessage.name}
+						</small>
+					</p>
+				</div>
+
+				<div className="mt-4 form-floating position-relative">
+					<input type="text" className="form-control" id="floatingInputGrid" placeholder="Author" value={interest.author} onChange={handleAuthorChange} />
+					<label htmlFor="floatingInputGrid">Author</label>
+					<p className='position-absolute text-danger'>
+						<small>
+							{errorMessage.author}
 						</small>
 					</p>
 				</div>
