@@ -56,7 +56,7 @@ export default class Users extends Component {
 							<img className='card' height={220} width={"90%"} src='/img/sample.webp'  alt=""/>
 						</div>
 						<div className='ms-4'>
-							<h2 className='border-bottom'>{this.state.user.firstname} {this.state.user.lastname}</h2>
+							<h2 className='border-bottom'>{this.state.user.firstName} {this.state.user.lastName}</h2>
 							<h5>Read: {this.state.bookInterests.length} books</h5>
 							<h5>Watched: {this.state.movieInterests.length} movies</h5>
 							<h5>Listened: {this.state.musicInterests.length} tracks</h5> <br/>

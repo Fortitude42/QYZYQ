@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
-import axios from "axios";
-import './Register.css'
+import { loginUser, registerUser } from '../../Services/Auth.js'
+import { useNavigate } from 'react-router-dom';
+import { isLogged } from '../../Services/UserInfo.js';
+import React, { useEffect, useState } from 'react';
+import './Register.css';
 
 
 function RegisterForm() {    
@@ -12,11 +14,13 @@ function RegisterForm() {
         passwordConfirm: "",
     });
 
+    const navigate = useNavigate();
+
     function isVaild(detail){
-        if(detail.first_name.length === 0)
+        if(detail.firstName.length === 0)
             return false;
         
-        if(detail.password !== detail.password_confirm)
+        if(detail.password !== detail.passwordConfirm)
             return false;
             
         if(detail.password.length < 6)
@@ -29,17 +33,22 @@ function RegisterForm() {
         e.preventDefault();
         if (!isVaild(detail))
             return;
-        
-        axios.post('http://localhost:5000/users/add', {
-            firstname: detail.firstName,
-            lastname: detail.lastName,
-            email: detail.email,
-            password: detail.password
-        }).then(response => {
-            console.log(response.data);
+        registerUser(detail)
+        .then(res => {
+            if(res.data == "User added"){
+                loginUser(detail);
+                navigate("/home");
+            }
         })
-        .catch((error) => console.log(error));
     };
+
+    useEffect(() => {
+        const goHomeIfLogged = async() => {
+            if (await isLogged())
+                navigate('/home')
+        }
+        goHomeIfLogged();
+    })
       
     return (
         <form className='login-form' onSubmit={submitHandler}>

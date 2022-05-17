@@ -60,7 +60,10 @@ export default class App extends Component {
 			<div>
 				<Navbar/>				
 				<Routes>
-					<Route path="/home" element={<Home />} key={'home'} />
+					<Route path="/home" element={<Home types={['movie', 'book', 'music']}/>} key={'home'} />
+					<Route path="/book" element={<Home types={['book']}/>} key={'home'} />
+					<Route path="/movie" element={<Home types={['movie']}/>} key={'home'} />
+					<Route path="/music" element={<Home types={['music']}/>} key={'home'} />
 					<Route path="/login" element={<Login />} key = 'login'/>
 					<Route path="/register" element={<Register />} key = 'register' />
 					<Route path="/create-interest" element={<CreateInterest	/>} key='create-interest' />

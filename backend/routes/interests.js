@@ -36,6 +36,7 @@ router.route('/').get((req, res) => {
 router.route('/add').post(upload.single('image'), (req, res) => {		
 	const newInterest = new Interest({
 		name: req.body.name,
+		author: req.body.author,
 		type: req.body.type,
 		description: req.body.description,
 		image: req.hasOwnProperty('file') ? req.file.filename : null
