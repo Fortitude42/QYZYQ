@@ -10,18 +10,19 @@ export default class Home extends Component {
 		super(props);
 		this.state = {
 			interests: [],
+			types: props.types,
 		}
 	}
 
 	componentDidMount() {
 		axios.get('http://localhost:5000/interests/')
-			.then(response =>	this.setState({interests: response.data}))
+			.then(response =>	this.setState({interests: response.data.filter(interest => this.state.types.includes(interest.type))}))
 			.catch((error) => console.log(error))		
 	}
 
 	interestList() {
 		let res = []
-		for (let i = 0; i < this.state.interests.length; i += 4) {
+		for (let i = 0; i < this.state.interests.length; i += 4) {			
 			let currentRow = [];
 			for (let j = 0; j < 4 && i + j < this.state.interests.length; ++j)
 				currentRow.push(this.state.interests[i + j])
