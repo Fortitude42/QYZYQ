@@ -14,6 +14,11 @@ const interestSchema = new Schema({
 		required: true,		
 	},		
 
+	author: {
+		type: String,
+		required: true,
+	},
+
 	description: {
 		type: String,
 		required: true,
