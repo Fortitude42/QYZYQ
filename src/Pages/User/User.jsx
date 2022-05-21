@@ -28,9 +28,11 @@ function User(props) {
 
 	function interestList(interests) {
 		let res = []
-		for (let i = 0; i < interests.length; i += 4) {
+
+		const rowSize = 5;
+		for (let i = 0; i < interests.length; i += rowSize) {
 			let currentRow = [];
-			for (let j = 0; j < 4 && i + j < interests.length; ++j)
+			for (let j = 0; j < rowSize && i + j < interests.length; ++j)
 				currentRow.push(interests[i + j])
 
 			res.push(
@@ -38,7 +40,7 @@ function User(props) {
 					{currentRow.map(inter => {
 						let path = "/interests/" + inter._id;
 						return (
-							<a href={path} className="w-20 mb-4 text-dark t-d-n me-4">
+							<a href={path} className="w-15 mb-4 text-dark t-d-n me-4">
 								<Interest interest={inter}/>
 							</a>)
 					})
@@ -81,31 +83,28 @@ function User(props) {
 		}).catch((error) => console.log(error));
 	}
 
-	function getChangePictureContent() {		
-		if (!clickedToChangePicture)
-			return (<a href="#" onClick={	e=> {setClickedToChangePicture(true);}} className="stretched-link text-secondary">Change your profile picture</a>);
-			 
-		return (
-			<div className='position-relative'>
-				<input className="form-control form-control-sm w-90" onChange={handlePictureChange} id="picture" type="file" />
-				<button type="button" onClick={handleChangePictureClick} className="btn btn-sm mt-1 btn-outline-secondary"> Submit</button> <br/>
-				<small className='text-danger mt-1 position-absolute'>{errorMessage}</small>
-			</div>
-		);
+	function getChangePictureContent() {				
 	}
 
 
 	
 	return (
-			<div>
+			<div className='pe-4'>
 				<div className='d-flex ps-4 pt-4 pb-4 border-bottom'>
 					<div className='w-20'>
 						<div className="w-5 d-flex justify-content-center">
 							<img className='card ' height={240} width={"90%"} src={`/img/${props.user.picture}`} onError={(e)=>{e.target.onerror = null; e.target.src="/img/sample.webp"}}  alt=""/>
 						</div>
 
-						<div className="mb-3 ps-4 pt-2">							
-							{getChangePictureContent()}								
+						<div className="mb-3 ps-4 pt-2">														
+							{clickedToChangePicture || <a href="#" onClick={	e=> {setClickedToChangePicture(true);}} className="z text-secondary">Change your profile picture</a>}
+							{clickedToChangePicture && 
+							<div className='position-relative'>
+								<input className="form-control form-control-sm w-90" onChange={handlePictureChange} id="picture" type="file" />
+								<button type="button" onClick={handleChangePictureClick} className="btn btn-sm mt-1 btn-outline-secondary"> Submit</button> <br/>
+								<small className='text-danger mt-1 position-absolute'>{errorMessage}</small>
+							</div>
+							}
 						</div>
 
 					</div>
@@ -119,13 +118,17 @@ function User(props) {
 					</div>
 				</div>
 
-				<div className='ps-4 pt-4'>
-					<h2>MUSIC</h2>
-					{interestList(interests.music)}
-					<h2>MOVIES</h2>
+				<div className='pt-4 ps-4'>
+					<div className='ps-10 border border-1 border-dark rounded ps-4 pt-3'>
+						<h3>MUSIC</h3>
+						{interestList(interests.music)}
+						
+					
+					<h3 className='mt-4'>MOVIES</h3>
 					{interestList(interests.movies)}
-					<h2>BOOKS</h2>
+					<h3>BOOKS</h3>
 					{interestList(interests.books)}
+					</div>
 				</div>
 			</div>
 	);

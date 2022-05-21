@@ -13,11 +13,11 @@ export default class Interest extends Component {
 
 	render() {
 		return (
-			<div className="border border-1 border-dark rounded ps-2 h-300 pt-2 pe-2">
+			<div className="border border-1 border-dark rounded ps-2 h-250 pt-2 pe-2">
 				<div className="d-flex justify-content-center">
-					<img height={220} width={"80%"} src={`/img/${this.state.interest.image}`} onError={(e)=>{e.target.onerror = null; e.target.src="/img/sample.webp"}} alt=""/>
+					<img className="rounded" height={180} width={"80%"} src={`/img/${this.state.interest.image}`} onError={(e)=>{e.target.onerror = null; e.target.src="/img/sample.webp"}} alt=""/>
 				</div>
-				<h4 className="text-center">{this.state.interest.name}</h4>
+				<h6 className="mt-1 text-center">{this.state.interest.name}</h6>
 			</div>
 		)
 	}
