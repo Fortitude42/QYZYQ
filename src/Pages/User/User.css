@@ -1,5 +1,5 @@
-.w-20{
-	width: 20%;
+.w-22{
+	width: 22%;
 }
 
 .w-90{
@@ -8,5 +8,13 @@
 
 .w-15{
 	width: 15%;
+}
+
+.me-90 {
+	margin-right: 90px;
+}
+
+.mb-40 {
+	margin-bottom: 40px;
 }
 

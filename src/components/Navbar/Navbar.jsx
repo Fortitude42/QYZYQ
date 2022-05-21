@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 
 function Navbar() {
   return (
-    <>
+    <div className="position-fixed z-1000 w-100">
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="col-2 text-center">
           <a className="navbar-brand brand-name" href="/">QYZYQ</a>
@@ -51,7 +51,7 @@ function Navbar() {
 
             <div className="col-4"></div>
 					</nav>
-    </>
+    </div>
   );
 }
 

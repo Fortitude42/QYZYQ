@@ -11,3 +11,7 @@
 svg {
     /*margin-left+ 5px;*/
 }
+
+.z-1000 {    
+    z-index: 1000;
+}

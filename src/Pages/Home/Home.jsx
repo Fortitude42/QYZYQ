@@ -36,7 +36,7 @@ export default class Home extends Component {
 	render() {
 		return (
 			
-			<div className="ps-4 pe-4 pt-4 w-75">
+			<div className="ps-4 pe-4 pt-4 w-90">				
 				{this.interestList()}
 			</div>			
 		)

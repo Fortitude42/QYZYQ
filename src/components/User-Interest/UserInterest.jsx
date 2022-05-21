@@ -13,9 +13,9 @@ export default class UserInterest extends Component {
 
 	render() {
 		return (
-			<div className="border border-1 border-dark rounded ps-2 h-250 pt-2 pe-2">
+			<div className="h-250 ps-1 pe-1 pt-1">
 				<div className="d-flex justify-content-center">
-					<img className="rounded" height={180} width={"80%"} src={`/img/${this.state.interest.image}`} onError={(e)=>{e.target.onerror = null; e.target.src="/img/sample.webp"}} alt=""/>
+					<img className="rounded" height={250} width={"100%"} src={`/img/${this.state.interest.image}`} onError={(e)=>{e.target.onerror = null; e.target.src="/img/sample.webp"}} alt=""/>
 				</div>
 				<h6 className="mt-1 text-center">{this.state.interest.name}</h6>
 			</div>

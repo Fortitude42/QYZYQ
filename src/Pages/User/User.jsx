@@ -29,7 +29,7 @@ function User(props) {
 	function interestList(interests) {
 		let res = []
 
-		const rowSize = 5;
+		const rowSize = 3;
 		for (let i = 0; i < interests.length; i += rowSize) {
 			let currentRow = [];
 			for (let j = 0; j < rowSize && i + j < interests.length; ++j)
@@ -40,7 +40,7 @@ function User(props) {
 					{currentRow.map(inter => {
 						let path = "/interests/" + inter._id;
 						return (
-							<a href={path} className="w-15 mb-4 text-dark t-d-n me-4">
+							<a href={path} className="w-22 mb-40 text-dark t-d-n me-90">
 								<UserInterest interest={inter}/>
 							</a>)
 					})
@@ -87,7 +87,7 @@ function User(props) {
 	return (
 			<div className='pe-4'>
 				<div className='d-flex ps-4 pt-4 pb-4 border-bottom'>
-					<div className='w-20'>
+					<div className='w-25'>
 						<div className="w-5 d-flex justify-content-center">
 							<img className='card ' height={240} width={"90%"} src={`/img/${props.user.picture}`} onError={(e)=>{e.target.onerror = null; e.target.src="/img/sample.webp"}}  alt=""/>
 						</div>
@@ -119,11 +119,13 @@ function User(props) {
 						<h3>MUSIC</h3>
 						{interestList(interests.music)}
 						
-					
-					<h3 className='mt-4'>MOVIES</h3>
-					{interestList(interests.movies)}
-					<h3>BOOKS</h3>
-					{interestList(interests.books)}
+						<div className='border-bottom mt-4'></div>					
+						<h3 className=''>MOVIES</h3>
+						{interestList(interests.movies)}
+						
+						<div className='border-bottom mt-4'></div>					
+						<h3>BOOKS</h3>
+						{interestList(interests.books)}
 					</div>
 				</div>
 			</div>
