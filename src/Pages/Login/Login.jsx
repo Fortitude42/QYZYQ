@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useLayoutEffect} from 'react';
+import React, { useEffect, useState } from 'react';
 import { loginUser, logoutUser } from '../../Services/Auth.js'
 import { useNavigate } from 'react-router-dom'
 import { isLogged } from '../../Services/UserInfo.js';
@@ -16,13 +16,13 @@ function LoginForm() {
         e.preventDefault();
         await loginUser(detail);
         if (await isLogged())
-            navigate('/home')
+            navigate('/')
     };
 
     useEffect(() => {
         const goHomeIfLogged = async() => {
             if (await isLogged())
-                navigate('/home')
+                navigate('/')
         }
         goHomeIfLogged();
     })
