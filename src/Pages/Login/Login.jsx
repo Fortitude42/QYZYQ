@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useLayoutEffect} from 'react';
+import React, { useEffect, useState } from 'react';
 import { loginUser, logoutUser } from '../../Services/Auth.js'
 import { useNavigate } from 'react-router-dom'
 import { isLogged } from '../../Services/UserInfo.js';
