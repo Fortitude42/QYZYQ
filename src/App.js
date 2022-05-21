@@ -60,7 +60,7 @@ export default class App extends Component {
 			<div>
 				<Navbar/>				
 				<Routes>
-					<Route path="/home" element={<Home types={['movie', 'book', 'music']}/>} key={'home'} />
+					<Route path="" element={<Home types={['movie', 'book', 'music']}/>} key={'home'} />
 					<Route path="/book" element={<Home types={['book']}/>} key={'home'} />
 					<Route path="/movie" element={<Home types={['movie']}/>} key={'home'} />
 					<Route path="/music" element={<Home types={['music']}/>} key={'home'} />

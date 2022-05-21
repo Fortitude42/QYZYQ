@@ -22,17 +22,19 @@ export default class Home extends Component {
 
 	interestList() {
 		let res = []
-		for (let i = 0; i < this.state.interests.length; i += 4) {			
+		const rowSize = 5;
+
+		for (let i = 0; i < this.state.interests.length; i += rowSize) {
 			let currentRow = [];
-			for (let j = 0; j < 4 && i + j < this.state.interests.length; ++j)
+			for (let j = 0; j < rowSize && i + j < this.state.interests.length; ++j)
 				currentRow.push(this.state.interests[i + j])
 
 			res.push(
-				<div className="d-flex justify-content-center">
+				<div className="d-flex">
 					{currentRow.map(inter => {
 						let path = "/interests/" + inter._id;
 						return (
-							<a href={path} className="w-20 ms-4 mb-4 text-dark t-d-n">
+							<a href={path} className="w-15 ms-4 mb-4 text-dark t-d-n">
 								<Interest interest={inter}/>
 							</a>)
 					})
