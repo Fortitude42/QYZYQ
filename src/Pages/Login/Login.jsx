@@ -16,13 +16,13 @@ function LoginForm() {
         e.preventDefault();
         await loginUser(detail);
         if (await isLogged())
-            navigate('/home')
+            navigate('/')
     };
 
     useEffect(() => {
         const goHomeIfLogged = async() => {
             if (await isLogged())
-                navigate('/home')
+                navigate('/')
         }
         goHomeIfLogged();
     })

@@ -67,7 +67,7 @@ function CreateInterest() {
 		
 		axios.post('http://localhost:5000/interests/add', formData).then(response => {
 			console.log(response.data);		
-			navigate("/home");
+			navigate("/");
 		}).catch((error) => console.log(error));
 	}
 	

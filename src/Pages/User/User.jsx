@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './User.css';
 import axios from 'axios';
-import Interest from '../../components/Interest/Interest';
+import UserInterest from '../../components/User-Interest/UserInterest';
 
 function User(props) {		
 	const [interests, setInerests] = useState({
@@ -41,7 +41,7 @@ function User(props) {
 						let path = "/interests/" + inter._id;
 						return (
 							<a href={path} className="w-15 mb-4 text-dark t-d-n me-4">
-								<Interest interest={inter}/>
+								<UserInterest interest={inter}/>
 							</a>)
 					})
 					}
@@ -82,10 +82,6 @@ function User(props) {
 			return window.location.reload();							
 		}).catch((error) => console.log(error));
 	}
-
-	function getChangePictureContent() {				
-	}
-
 
 	
 	return (

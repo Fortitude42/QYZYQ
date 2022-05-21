@@ -37,7 +37,7 @@ function RegisterForm() {
         .then(res => {
             if(res.data == "User added"){
                 loginUser(detail);
-                navigate("/home");
+                navigate("/");
             }
         })
     };
@@ -45,7 +45,7 @@ function RegisterForm() {
     useEffect(() => {
         const goHomeIfLogged = async() => {
             if (await isLogged())
-                navigate('/home')
+                navigate('/')
         }
         goHomeIfLogged();
     })

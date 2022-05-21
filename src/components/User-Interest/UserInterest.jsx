@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import './Interest.css';
+import './UserInterest.css';
 
 
 
-export default class Interest extends Component {
+export default class UserInterest extends Component {
 	constructor(props){
 		super(props);	
 		this.state = {
