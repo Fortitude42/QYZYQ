@@ -115,7 +115,7 @@ function User(props) {
 				</div>
 
 				<div className='pt-4 ps-4'>
-					<div className='ps-10 border border-1 border-dark rounded ps-4 pt-3'>
+					<div className='ps-10 border border-1 border-dark rounded ps-4 pt-3 bg-light'>
 						<h3>MUSIC</h3>
 						{interestList(interests.music)}
 						

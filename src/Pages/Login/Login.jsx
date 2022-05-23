@@ -28,7 +28,7 @@ function LoginForm() {
     })
 
     return (
-        <form className='login-form' onSubmit={submitHandler}>
+        <form className='' onSubmit={submitHandler}>
             <input type='email' placeholder='Email' onChange = {e => setDetail({...detail, email: e.target.value})} value={detail.email} />
             <input type='password' placeholder='Password' onChange = {e => setDetail({...detail, password: e.target.value})} value={detail.password} />
             <button>Login</button>

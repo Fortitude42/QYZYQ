@@ -59,23 +59,24 @@ export default class App extends Component {
 	render() {
 
 		return (
-			<div>
-				
+			<div className="">				
 				<Navbar/>
 				<div id="wrapper" className="pt-100">
 					<Sidebar/>
 				
-					<Routes>
-						<Route path="" element={<Home types={['movie', 'book', 'music']}/>} key={'home'} />
-						<Route path="/book" element={<Home types={['book']}/>} key={'home'} />
-						<Route path="/movie" element={<Home types={['movie']}/>} key={'home'} />
-						<Route path="/music" element={<Home types={['music']}/>} key={'home'} />
-						<Route path="/login" element={<Login />} key = 'login'/>
-						<Route path="/register" element={<Register />} key = 'register' />
-						<Route path="/create-interest" element={<CreateInterest	/>} key='create-interest' />
-						{this.interestList()}
-						{this.usersList()}
-					</Routes>
+					<div className="bg">
+						<Routes>
+							<Route path="" element={<Home types={['movie', 'book', 'music']}/>} key={'home'} />
+							<Route path="/book" element={<Home types={['book']}/>} key={'home'} />
+							<Route path="/movie" element={<Home types={['movie']}/>} key={'home'} />
+							<Route path="/music" element={<Home types={['music']}/>} key={'home'} />
+							<Route path="/login" element={<Login />} key = 'login'/>
+							<Route path="/register" element={<Register />} key = 'register' />
+							<Route path="/create-interest" element={<CreateInterest	/>} key='create-interest' />
+							{this.interestList()}
+							{this.usersList()}
+						</Routes>
+					</div>
 				</div>
 			</div>
 		)

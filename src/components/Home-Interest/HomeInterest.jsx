@@ -16,7 +16,7 @@ export default class HomeInterest extends Component {
 
 	render() {
 		return (
-			<div className="border border-1 border-dark rounded ps-2 h-360 pt-4 pe-4 ps-4 w-100">
+			<div className="border border-1 border-dark rounded ps-2 h-360 pt-4 pe-4 ps-4 w-100 bg-light">
 				<div className="d-flex w-100">
 					<a className="w-25" href={this.state.path} >
 						<img className="rounded" height={260} width={"100%"} src={`/img/${this.state.interest.image}`} onError={(e)=>{e.target.onerror = null; e.target.src="/img/sample.webp"}} alt=""/>

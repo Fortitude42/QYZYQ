@@ -15,3 +15,7 @@ svg {
 .z-1000 {    
     z-index: 1000;
 }
+
+.bg-navbar {
+    background-color: #FAF9F6;
+}
