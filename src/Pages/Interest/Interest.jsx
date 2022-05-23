@@ -15,7 +15,7 @@ export default class Interest extends Component {
 				<div className="w-30 d-flex justify-content-center">
 					<img height={420} width={"100%"} src={`/img/${this.state.interest.image}`} onError={(e)=>{e.target.onerror = null; e.target.src="/img/sample.webp"}} alt=""/>
 				</div>
-				<div className="ms-4 border border-1 rounded border-dark ps-4 pe-4 w-50">
+				<div className="ms-4 border border-1 rounded border-dark ps-4 pe-4 w-50 bg-light">
 					<h1 className="mt-4">{this.state.interest.name}</h1>
 					<h5>Author: {this.state.interest.author}</h5>					
 					<h3>About {this.state.interest.type}</h3>

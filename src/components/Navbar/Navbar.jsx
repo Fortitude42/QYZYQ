@@ -6,7 +6,7 @@ function Navbar() {
   return (
     <div className="position-fixed z-1000 w-100">
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <div className="col-2 text-center">
+        <div className="col-2 text-center text-white">
           <a className="navbar-brand brand-name" href="/">QYZYQ</a>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
