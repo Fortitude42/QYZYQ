@@ -57,6 +57,11 @@
     max-width: 300px;
     margin: 0 auto;
   }
+
+  html {
+    margin: 0;
+    height: 100%;
+  }
   body {
     font-family: "Roboto", sans-serif;
     -webkit-font-smoothing: antialiased;

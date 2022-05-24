@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useLayoutEffect} from 'react';
+import React, { useEffect, useState } from 'react';
 import { loginUser, logoutUser } from '../../Services/Auth.js'
 import { useNavigate } from 'react-router-dom'
 import { isLogged } from '../../Services/UserInfo.js';
@@ -16,19 +16,19 @@ function LoginForm() {
         e.preventDefault();
         await loginUser(detail);
         if (await isLogged())
-            navigate('/home')
+            navigate('/')
     };
 
     useEffect(() => {
         const goHomeIfLogged = async() => {
             if (await isLogged())
-                navigate('/home')
+                navigate('/')
         }
         goHomeIfLogged();
     })
 
     return (
-        <form className='login-form' onSubmit={submitHandler}>
+        <form className='' onSubmit={submitHandler}>
             <input type='email' placeholder='Email' onChange = {e => setDetail({...detail, email: e.target.value})} value={detail.email} />
             <input type='password' placeholder='Password' onChange = {e => setDetail({...detail, password: e.target.value})} value={detail.password} />
             <button>Login</button>

@@ -67,14 +67,14 @@ function CreateInterest() {
 		
 		axios.post('http://localhost:5000/interests/add', formData).then(response => {
 			console.log(response.data);		
-			navigate("/home");
+			navigate("/");
 		}).catch((error) => console.log(error));
 	}
 	
 	return (
 		<div className="ps-4 pe-4 pt-4">
 			<h1>New interest</h1>
-			<div className="w-75 border border-dark rounded ps-4 pe-4 pt-4 pb-4 mt-4 position-relative">
+			<div className="w-75 border border-dark rounded ps-4 pe-4 pt-4 pb-4 mt-4 position-relative bg-white">
 				<div className="form-floating position-relative">
 					<input type="text" className="form-control" id="floatingInputGrid" placeholder="Name" value={interest.name} onChange={handleNameChange} />
 					<label htmlFor="floatingInputGrid">Name</label>

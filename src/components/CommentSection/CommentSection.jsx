@@ -1,9 +1,8 @@
 import React , {useState} from 'react'
 import axios from 'axios';
-import { Button, Input } from 'antd';
 import { isLogged } from '../../Services/UserInfo.js';
 import SingleComment from '../../components/SingleComment/SingleComment';
-const { TextArea } = Input;
+import './CommentSection.css'
 
 function CommentSection(props) {
     const [Comment, setComment] = useState("")
@@ -20,7 +19,7 @@ function CommentSection(props) {
 
         const variables = { 
             description: Comment,
-            author: Comment,
+            author: "Parassat",
             postId: props.postId,
          }
 
@@ -33,22 +32,27 @@ function CommentSection(props) {
     }
 
     return (
-        <div>
-            <form style={{ display: 'flex' }} onSubmit={onSubmit}>
-                <TextArea
-                    style={{ width: '100%', borderRadius: '5px' }}
-                    onChange={handleChange}
-                    value={Comment}
-                    placeholder="write some comments"
-                />
+        <div className='w-100'>
+            <form className='w-100 ps-4' onSubmit={onSubmit}>
+                <div className='d-flex w-100'>
+                    <img className="br-50 " height={80} src="/img/sample.webp" alt=""/>
+                    <textarea                    
+                        onChange={handleChange}
+                        value={Comment}
+                        rows="4"
+                        className='ms-4 ps-4 pt-2 pt-1 rounded w-75'
+                        placeholder="write some comments"
+                    >                        
+                    </textarea>
+                </div>
+                <div className='w-85 d-flex justify-content-end mt-2 '>
+                    <button type="button"  className='btn btn-primary' onClick={onSubmit}>Submit</button>
+                </div>
                 
-                <Button style={{ width: '20%', height: '52px' }} onClick={onSubmit}>Submit</Button>
             </form>
 
             {props.CommentLists && props.CommentLists.map((comment) => (
-                <React.Fragment>
-                    <SingleComment comment={comment} postId={props.postId} refreshFunction={props.refreshFunction} />
-                </React.Fragment>
+                <SingleComment comment={comment} refreshFunction={props.refreshFunction} />
             ))}
 
         </div>
