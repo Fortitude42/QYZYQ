@@ -12,13 +12,25 @@
     padding-left: 5%;
 }
 
-.m-20 {
-    margin-right: 18%;
+
+ @media screen and (min-width: 1185px) and (max-width: 1280px) {
+    .m-20 {
+        margin-right: 15%;
+    }        
+    .m-30 {
+        margin-right: 11%;
+    }        
 }
 
-.m-30 {
-    margin-right: 27%;
-}
+
+@media screen and (min-width: 1285px) {
+    .m-20 {
+        margin-right: 18%;
+    }        
+    .m-30 {
+        margin-right: 27%;
+    }    
+} 
 
 .z-1000 {    
     z-index: 1000;
