@@ -2,11 +2,37 @@ const router = require('express').Router();
 let User = require('../models/user.model');
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const {v4: uuidv4 } = require('uuid');
+const multer = require('multer');
+
+let path = require('path');
+
+
+const storage = multer.diskStorage({
+	destination: function(req, file, cb) {
+		cb(null, '../public/img');
+	},
+	filename(req, file, cb) {
+		cb(null, uuidv4() + '-' + Date.now() + path.extname(file.originalname));
+	}
+})
+
+const fileFilter = (req, file, cb) => {
+	const allowedFileTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
+	if(allowedFileTypes.includes(file.mimetype)) {
+		cb(null, true);
+	} else {
+		cb(null, false);
+	}
+}
+
+let upload = multer({ storage, fileFilter });
+
 
 router.route('/').get((req, res) => {
 	User.find()
 		.then(users => res.json(users))
-		.catch(err => res.status(400).json('Error: ' + err));		
+		.catch(err => res.status(400).json('Error: ' + err));
 })
 
 
@@ -18,66 +44,78 @@ router.route('/register').post(async (req, res) => {
 		.catch(err => res.status(400).json('Error: ' + err));
 })
 
+router.route('/update/:id').post(upload.single('picture'), (req, res) => {
+	User.findById(req.params.id)
+		.then(user => {
+			user.firstName = req.body.firstName;
+			user.lastName = req.body.lastName;
+			user.email = req.body.email;
+			user.picture = req.hasOwnProperty('file') ? req.file.filename : null;
+
+			user.save()
+				.then(() => res.json("User updated!"))
+				.catch(err => res.status(400).json("Error " + err));
+
+		}).catch(err => res.status(400).json("Error " + err))
+})
+
 const secondsInDay = 86400;
 const secretWord = "rarewoirewhrioewrqoiheqwoirhieworhqower"
 
 router.route('/login').post((req, res) => { 
-	const userLoggingIn = req.body;
-	User.findOne({email: userLoggingIn.email})
-		.then(dbUser => {
-			if(!dbUser){
+	const currentUser = req.body;
+	
+	User.findOne({email: currentUser.email})
+		.then(userFromDB => {
+
+			if(!userFromDB)
 				return res.json('Invalid email or password')
-			}
-			bcrypt.compare(userLoggingIn.password, dbUser.password)			
-			.then(isCorrect => {
-				if(isCorrect){
+			
+
+			bcrypt.compare(currentUser.password, userFromDB.password).then(isCorrect => {
+				if (isCorrect) {
 					const payload = {
-						id: dbUser._id,
-						firstName: dbUser.firstName,
-						lastName: dbUser.lastName
+						id: userFromDB._id,
+						firstName: userFromDB.firstName,
+						lastName: userFromDB.lastName
 					};
-					jwt.sign(
-						payload,
-						secretWord,
-						{expiresIn: secondsInDay}, 
-						(err, token) => {
-							if(err) return res.status(400).json('Error: ' + err);
-							return res.json({
-								message: "Success",
-								token: "Bearer " + token,
-							});
-						}
-					);
-				}else{
-					return res.json('Invalid email or password');
-				}
+
+					jwt.sign(payload, secretWord, {expiresIn: secondsInDay}, (err, token) => {						 
+						return err ? res.status(400).json('Error: ' + err) : res.json({message: "Success",token: "Bearer " + token})
+					});
+				} else 
+					return res.json('Invalid email or password');				
 			})
 		})
 })
 
 function verifyJWT(req, res, next) {
-    const token = req.headers["x-access-token"]?.split(' ')[1]
-    if (token) {
-        jwt.verify(token, secretWord, (err, decoded) => {
-            if (err) return res.json({isLoggedIn: false, message: "Failed To Authenticate"});
-            req.user = {};
-			console.log(decoded.firstName);
-			console.log(decoded.lastName);
-            req.user.id = decoded.id;
-			req.user.firstName = decoded.firstName;
-			req.user.lastName = decoded.lastName;
-            next();
-        })
-    } else {
-        res.json({message: "Incorrect Token Given", isLoggedIn: false});
-    }
+	const token = req.headers["x-access-token"]?.split(' ')[1]
+	if (token) {
+		jwt.verify(token, secretWord, (err, decoded) => {
+			if (err)
+				return res.json({isLoggedIn: false, message: "Failed To Authenticate"});
+
+			req.user = {
+				id: decoded.id,
+				firstName: decoded.firstName,
+				lastName: decoded.lastName,
+			};
+			
+			next();
+		})
+	} else {
+		res.json({message: "Incorrect Token Given", isLoggedIn: false});
+	}
 }
 
-router.get("/isUserAuth", verifyJWT, (req, res) => {
-	console.log(req.user.firstName);
-	console.log('ewq');
-	console.log(req.user.lastName);
-    return res.json({isLoggedIn: true, firstName: req.user.firstName, lastName: req.user.lastName})
+router.get("/isUserAuth", verifyJWT, (req, res) => {	
+	return res.json({
+		isLoggedIn: true, 
+		id: req.user.id,
+		firstName: req.user.firstName, 
+		lastName: req.user.lastName
+	})
 })
 
 module.exports = router;

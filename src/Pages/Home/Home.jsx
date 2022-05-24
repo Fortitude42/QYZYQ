@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import 'bootstrap/dist/css/bootstrap.css';	
-import Interest from "../../components/Interest/Interest";
+import HomeInterest from "../../components/Home-Interest/HomeInterest";
 import './Home.css'
 
 
@@ -22,31 +22,21 @@ export default class Home extends Component {
 
 	interestList() {
 		let res = []
-		for (let i = 0; i < this.state.interests.length; i += 4) {			
-			let currentRow = [];
-			for (let j = 0; j < 4 && i + j < this.state.interests.length; ++j)
-				currentRow.push(this.state.interests[i + j])
 
+		for (let inter of this.state.interests) {			
 			res.push(
-				<div className="d-flex justify-content-center">
-					{currentRow.map(inter => {
-						let path = "/interests/" + inter._id;
-						return (
-							<a href={path} className="w-20 ms-4 mb-4 text-dark t-d-n">
-								<Interest interest={inter}/>
-							</a>)
-					})
-					}
-				</div>
-			)
+				<div className="ms-4 mb-4 text-dark t-d-n">
+					<HomeInterest interest={inter}/>
+				</div>);
 		}
+
 		return res;
 	}
 
 	render() {
 		return (
 			
-			<div className="ps-4 pe-4 pt-4">
+			<div className="ps-4 pe-4 pt-4 w-90">				
 				{this.interestList()}
 			</div>			
 		)

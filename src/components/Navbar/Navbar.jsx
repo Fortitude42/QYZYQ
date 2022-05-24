@@ -4,10 +4,11 @@ import 'bootstrap/dist/css/bootstrap.css'
 
 function Navbar() {
   return (
-    <>
+    <div className="position-fixed z-1000 w-100">
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
+
         <div className="text-center padding-icon m-20">
-          <a className="navbar-brand brand-name" href="/home">QYZYQ</a>
+          <a className="navbar-brand brand-name" href="/">QYZYQ</a>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
@@ -62,7 +63,7 @@ function Navbar() {
 
 
 			</nav>
-    </>
+    </div>
   );
 }
 

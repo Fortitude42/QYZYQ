@@ -1,6 +1,6 @@
 import { loginUser, registerUser } from '../../Services/Auth.js'
 import { useNavigate } from 'react-router-dom';
-import { isLogged } from '../../Services/UserInfo.js';
+import { getCurrentUser } from '../../Services/UserInfo.js';
 import React, { useEffect, useState } from 'react';
 import './Register.css';
 
@@ -37,17 +37,19 @@ function RegisterForm() {
         .then(res => {
             if(res.data == "User added"){
                 loginUser(detail);
-                navigate("/home");
+                navigate("/");
             }
         })
     };
 
-    useEffect(() => {
-        const goHomeIfLogged = async() => {
-            if (await isLogged())
-                navigate('/home')
-        }
-        goHomeIfLogged();
+    const goToUserPageIfLoggedIn = async() => {
+        const currentUser = await getCurrentUser();
+        if (currentUser.isLoggedIn)
+            navigate('/users/'+currentUser.id)
+    }
+
+    useEffect(() => {        
+        goToUserPageIfLoggedIn();
     })
       
     return (
