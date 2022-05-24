@@ -1,8 +1,9 @@
 import React , {useState} from 'react'
 import axios from 'axios';
-import { isLogged } from '../../Services/UserInfo.js';
+import { getCurrentUser } from '../../Services/UserInfo.js';
 import SingleComment from '../../components/SingleComment/SingleComment';
 import './CommentSection.css'
+import { useNavigate } from 'react-router-dom'
 
 function CommentSection(props) {
     const [Comment, setComment] = useState("")
@@ -11,13 +12,17 @@ function CommentSection(props) {
         setComment(e.currentTarget.value)
     }
 
+    const navigate = useNavigate();
+
     const onSubmit = async(e) => {
         e.preventDefault();
 
-        if(!await isLogged())
+        if(!(await getCurrentUser()).isLoggedIn) {
+            navigate('/login');
             return;
+        }
 
-        const variables = { 
+        const variables = {
             description: Comment,
             author: "Parassat",
             postId: props.postId,
