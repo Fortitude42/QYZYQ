@@ -59,12 +59,12 @@ export default class App extends Component {
 	render() {
 
 		return (
-			<div className="">				
+			<div className="pb-4">				
 				<Navbar/>
 				<div id="wrapper" className="pt-100">
 					<Sidebar/>
 				
-					<div className="bg">
+					<div className="">
 						<Routes>
 							<Route path="" element={<Home types={['movie', 'book', 'music']}/>} key={'home'} />
 							<Route path="/book" element={<Home types={['book']}/>} key={'home'} />
