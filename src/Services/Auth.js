@@ -37,4 +37,4 @@ function logoutUser(){
     localStorage.removeItem("token");
 }
 
-export {loginUser,logoutUser,registerUser}
+export { loginUser, logoutUser, registerUser };

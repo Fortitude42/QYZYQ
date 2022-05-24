@@ -112,6 +112,7 @@ function verifyJWT(req, res, next) {
 router.get("/isUserAuth", verifyJWT, (req, res) => {	
 	return res.json({
 		isLoggedIn: true, 
+		id: req.user.id,
 		firstName: req.user.firstName, 
 		lastName: req.user.lastName
 	})

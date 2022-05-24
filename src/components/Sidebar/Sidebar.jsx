@@ -1,5 +1,6 @@
 import React from "react";
 import './Sidebar.css'
+import { logoutUser } from '../../Services/Auth';
 
 function Sidebar() {
 	return (		
@@ -13,7 +14,12 @@ function Sidebar() {
                 </li>
                 <li>
                     <a href="/register">Register</a>
-                </li>                
+                </li>
+
+                {/* todo remove */}
+                <li>
+                    <a href="/" onClick={logoutUser}>Logout</a>
+                </li>
             </ul>
         </div>                
 	)
