@@ -8,9 +8,29 @@
     text-align: center;
 }
 
-svg {
-    /*margin-left+ 5px;*/
+.padding-icon {
+    padding-left: 5%;
 }
+
+
+ @media screen and (min-width: 1185px) and (max-width: 1280px) {
+    .m-20 {
+        margin-right: 15%;
+    }        
+    .m-30 {
+        margin-right: 11%;
+    }        
+}
+
+
+@media screen and (min-width: 1285px) {
+    .m-20 {
+        margin-right: 18%;
+    }        
+    .m-30 {
+        margin-right: 27%;
+    }    
+} 
 
 .z-1000 {    
     z-index: 1000;
@@ -18,4 +38,8 @@ svg {
 
 .bg-navbar {
     background-color: #FAF9F6;
+}
+
+.br-30 {
+    border-radius: 30%;
 }

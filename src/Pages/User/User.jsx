@@ -89,7 +89,7 @@ function User(props) {
 				<div className='d-flex ps-4 pt-4 pb-4 border-bottom'>
 					<div className='w-25'>
 						<div className="w-5 d-flex justify-content-center">
-							<img className='card ' height={240} width={"90%"} src={`/img/${props.user.picture}`} onError={(e)=>{e.target.onerror = null; e.target.src="/img/sample.webp"}}  alt=""/>
+							<img className='card ' height={240} width={"90%"} src={`/img/${props.user.picture}`} onError={(e)=>{e.target.onerror = null; e.target.src="/img/sample1.jpg"}}  alt=""/>
 						</div>
 
 						<div className="mb-3 ps-4 pt-2">														
