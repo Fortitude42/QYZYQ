@@ -1,4 +1,4 @@
-async function isLogged(){
+async function getCurrentUser(){
     const res = await fetch("http://localhost:5000/users/isUserAuth", {
         headers: {
             "x-access-token": localStorage.getItem("token")
@@ -7,7 +7,8 @@ async function isLogged(){
 
     const data = await res.json();
 
-    return data.isLoggedIn;
+    return data;
 }
 
-export {isLogged};
+
+export {getCurrentUser};
