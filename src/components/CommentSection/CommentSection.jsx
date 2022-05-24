@@ -40,7 +40,7 @@ function CommentSection(props) {
         <div className='w-100'>
             <form className='w-100 ps-4' onSubmit={onSubmit}>
                 <div className='d-flex w-100'>
-                    <img className="br-50 " height={80} src="/img/sample.webp" alt=""/>
+                    <img className="br-50 " height={80} src="/img/sample1.jpg" alt=""/>
                     <textarea                    
                         onChange={handleChange}
                         value={Comment}
