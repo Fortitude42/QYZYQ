@@ -9,6 +9,7 @@ import Login from './Pages/Login/Login.jsx'
 import Register from './Pages/Register/Register.jsx'
 import Interest from "./Pages/Interest/Interest";
 import axios from "axios";
+import 'antd/dist/antd.min.css'
 import CreateInterest from './Pages/Create-Interest/CreateInterest'
 
 
