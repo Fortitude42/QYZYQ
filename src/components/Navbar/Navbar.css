@@ -8,6 +8,14 @@
     text-align: center;
 }
 
-svg {
-    /*margin-left+ 5px;*/
+.padding-icon {
+    padding-left: 5%;
+}
+
+.m-20 {
+    margin-right: 18%;
+}
+
+.m-30 {
+    margin-right: 27%;
 }
