@@ -35,6 +35,12 @@ router.route('/').get((req, res) => {
 		.catch(err => res.status(400).json('Error: ' + err));
 })
 
+router.route('/getById/:id').get((req, res) =>{
+	User.findById(req.params.id)
+		.then(user => res.json(user))
+		.catch(err => res.status(400).json('Error: ' + err));
+})
+
 
 router.route('/register').post(async (req, res) => {
 	const newUser = new User(req.body);	
@@ -77,7 +83,8 @@ router.route('/login').post((req, res) => {
 					const payload = {
 						id: userFromDB._id,
 						firstName: userFromDB.firstName,
-						lastName: userFromDB.lastName
+						lastName: userFromDB.lastName,
+						picture: userFromDB.picture,
 					};
 
 					jwt.sign(payload, secretWord, {expiresIn: secondsInDay}, (err, token) => {						 
@@ -100,6 +107,7 @@ function verifyJWT(req, res, next) {
 				id: decoded.id,
 				firstName: decoded.firstName,
 				lastName: decoded.lastName,
+				picture: decoded.picture,
 			};
 			
 			next();
@@ -114,7 +122,8 @@ router.get("/isUserAuth", verifyJWT, (req, res) => {
 		isLoggedIn: true, 
 		id: req.user.id,
 		firstName: req.user.firstName, 
-		lastName: req.user.lastName
+		lastName: req.user.lastName,
+		picture: req.user.picture,
 	})
 })
 

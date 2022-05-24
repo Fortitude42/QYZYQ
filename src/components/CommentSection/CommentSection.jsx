@@ -1,4 +1,4 @@
-import React , {useState} from 'react'
+import React , {useEffect, useState} from 'react'
 import axios from 'axios';
 import { getCurrentUser } from '../../Services/UserInfo.js';
 import SingleComment from '../../components/SingleComment/SingleComment';
@@ -7,6 +7,18 @@ import { useNavigate } from 'react-router-dom'
 
 function CommentSection(props) {
     const [Comment, setComment] = useState("")
+    const [currentUser, setCurrentUser] = useState({
+        isLoggedIn: false,
+    });
+    
+    async function setUser() {
+        const user = await getCurrentUser();
+        setCurrentUser(user);
+    }
+
+    useEffect(() => {
+        setUser();
+    })
 
     const handleChange = (e) => {
         setComment(e.currentTarget.value)
@@ -17,15 +29,15 @@ function CommentSection(props) {
     const onSubmit = async(e) => {
         e.preventDefault();
 
-        if(!(await getCurrentUser()).isLoggedIn) {
+        if(!currentUser.isLoggedIn) {
             navigate('/login');
             return;
         }
-
+        
         const variables = {
             description: Comment,
-            author: "Parassat",
-            postId: props.postId,
+            authorId: currentUser.id,
+            insterestId: props.insterestId,
          }
 
         axios.post('http://localhost:5000/comments/postComment', variables)
@@ -40,7 +52,7 @@ function CommentSection(props) {
         <div className='w-100'>
             <form className='w-100 ps-4' onSubmit={onSubmit}>
                 <div className='d-flex w-100'>
-                    <img className="br-50 " height={80} src="/img/sample1.jpg" alt=""/>
+                <img className="br-50 mt-4" width={80} height={80} src={`/img/${currentUser.picture}`} onError={(e)=>{e.target.onerror = null; e.target.src="/img/sample1.jpg"}} alt=""/>
                     <textarea                    
                         onChange={handleChange}
                         value={Comment}
@@ -56,7 +68,7 @@ function CommentSection(props) {
                 
             </form>
 
-            {props.CommentLists && props.CommentLists.map((comment) => (
+            {props.CommentList && props.CommentList.map((comment) => (
                 <SingleComment comment={comment} refreshFunction={props.refreshFunction} />
             ))}
 
@@ -64,4 +76,4 @@ function CommentSection(props) {
     )
 }
 
-export default CommentSection
+export default CommentSection;

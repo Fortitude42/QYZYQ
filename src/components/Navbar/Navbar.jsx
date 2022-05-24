@@ -59,14 +59,14 @@ function Navbar() {
               </a>
             </li>
 
-            { currentUser.isLoggedIn || <li className="nav-item px-4 center">              
+            { currentUser.isLoggedIn || <li className="nav-item px-4 center">
               <a className="nav-link" href="/login">
                 <img height="32" width="32" src="/img/free-icon-enter-1286825.png"/>
                 <br/>Login
               </a>
             </li> }
 
-            {currentUser.isLoggedIn || <li className="nav-item px-4 center">              
+            {currentUser.isLoggedIn || <li className="nav-item px-4 center">
               <a className="nav-link" href="/register">
                 <img height="32" width="32" src="/img/free-icon-user-507637.png"/>
                 <br/>Register
@@ -76,11 +76,11 @@ function Navbar() {
             {currentUser.isLoggedIn && 
               <li className="nav-item px-4" >
                 <a className="nav-link t-d-n d-flex" href={"/users/"+currentUser.id} >
-                  <img className="br-50 " height="55" width="50" src="/img/sample1.jpg"/>
+                <img className="br-50" width="50" height="50" src={`/img/${currentUser.picture}`} onError={(e)=>{e.target.onerror = null; e.target.src="/img/sample1.jpg"}} alt=""/>
                   <span className="text-dark mt-3 ms-2">Me</span>
-                </a>                
+                </a>
               </li> }
-          </ul> 
+          </ul>   
 				</div>
 
 

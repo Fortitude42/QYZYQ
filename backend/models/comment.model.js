@@ -2,12 +2,12 @@ const { default: mongoose } = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-const commentarySchema = new Schema({
-	postId: {
+const commentSchema = new Schema({
+	insterestId: {
 		type: String,
 		required: true,
 	},
-	author: {
+	authorId: {
 		type: String,
 		required: true,
 	},
@@ -18,6 +18,6 @@ const commentarySchema = new Schema({
 }, )
 
 
-const Comments = mongoose.model('Comments', commentarySchema);
+const Comments = mongoose.model('Comments', commentSchema);
 
 module.exports = Comments;
