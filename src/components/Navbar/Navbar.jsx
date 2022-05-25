@@ -15,7 +15,7 @@ function Navbar() {
 
   useEffect(() => {
     setUser();    
-  })
+  }, [])
 
   return (    
     <div className="position-fixed z-1000 w-100">      

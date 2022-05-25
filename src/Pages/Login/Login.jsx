@@ -14,8 +14,10 @@ function LoginForm() {
 
     const goToUserPageIfLoggedIn = async() => {
         const currentUser = await getCurrentUser();
-        if (currentUser.isLoggedIn)
-            navigate('/users/'+currentUser.id)
+        if (currentUser.isLoggedIn) {            
+            navigate('/users/'+currentUser.id);
+            window.location.reload();
+        }
     }
     
     const submitHandler = async(e) => {

@@ -18,7 +18,7 @@ function CommentSection(props) {
 
     useEffect(() => {
         setUser();
-    })
+    }, [])
 
     const handleChange = (e) => {
         setComment(e.currentTarget.value)
@@ -42,8 +42,9 @@ function CommentSection(props) {
 
         axios.post('http://localhost:5000/comments/postComment', variables)
         .then(res => {
-            if(res.data == "Comment added"){
+            if(res.data === "Comment added"){
                 props.refreshFunction(res);
+                window.location.reload();
             }
         })
     }

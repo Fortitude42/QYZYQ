@@ -5,7 +5,7 @@ import { logoutUser } from '../../Services/Auth';
 function Sidebar() {
 	return (		
         <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
+            <ul className="sidebar-nav">
                 <li className="mt-4">
                     <a href="/create-interest" className="">Create Interest</a>
                 </li>

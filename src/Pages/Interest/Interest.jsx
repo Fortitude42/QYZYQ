@@ -5,15 +5,15 @@ import CommentSection from '../../components/CommentSection/CommentSection';
 
 function Interest(props) {	
 	const [commentList, setCommentList] = useState([]);		
-	const updateComment =  (newComment) => {		
-		setCommentList(commentList.concat(newComment))
+	const updateComment =  (newComment) => {				
+		setCommentList(commentList.concat(newComment))		
 	}
 
 	useEffect(() => {										
 		axios.get('http://localhost:5000/comments/getComments/' + props.interest._id)
 			.then(response => {setCommentList(response.data)})
-			.catch((error) => console.log(error));						
-	})
+			.catch((error) => console.log(error));
+	}, [])
 
 	return (				
 		<div className='ps-4'>
@@ -27,9 +27,9 @@ function Interest(props) {
 					<h3>About {props.interest.type}</h3>
 					<span className='break'> {props.interest.description}</span>
 				</div>
-			</div>				
+			</div>
 		<div className='mt-4'>
-			<CommentSection CommentList = {commentList} insterestId={props.interest._id} refreshFunction = {updateComment}/>
+			<CommentSection CommentList = {commentList.reverse()} insterestId={props.interest._id} refreshFunction = {updateComment}/>
 		</div>
 		</div>
 	);

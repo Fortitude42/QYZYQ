@@ -5,15 +5,13 @@ async function getCurrentUser(){
         }
     })    
 
-    const data = await res.json();   
-    console.log(data);
-    return data;
+    return await res.json();        
 }
 
 async function findUserById(id) {    
     const res = await fetch("http://localhost:5000/users/getById/" + id);
-    const data = await res.json() ;    
-    return data;
+    return await res.json() ;    
+    
 }
 
 
