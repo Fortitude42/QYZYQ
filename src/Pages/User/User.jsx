@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './User.css';
 import axios from 'axios';
 import UserInterest from '../../components/User-Interest/UserInterest';
+import { findInterestsByUserId } from '../../Services/InterestService';
 
 function User(props) {		
 	const [interests, setInerests] = useState({
@@ -14,17 +15,19 @@ function User(props) {
 	const [changedPicture, setChangedPicture] = useState(null);
 	const [clickedToChangePicture, setClickedToChangePicture] = useState(false);	
 
-	
+	async function asyncInterestSetter() {
+		const allInterests = await findInterestsByUserId(props.user._id);
+		console.log(allInterests);
+		setInerests({
+			movies: allInterests.filter(inter => inter.type === 'movie'),
+			music: allInterests.filter(inter => inter.type === 'music'),
+			books: allInterests.filter(inter => inter.type === 'book'),
+		})
+	}
 
 	useEffect(() =>  {		
-		axios.get('http://localhost:5000/interests/')
-			.then(response => setInerests({
-				movies: response.data.filter(interest => interest.type === 'movie'),
-				music: response.data.filter(interest => interest.type === 'music'),
-				books: response.data.filter(interest => interest.type === 'book'),
-			}))
-			.catch((error) => console.log(error))
-	})
+		asyncInterestSetter();
+	}, [])
 
 	function interestList(interests) {
 		let res = []
@@ -107,24 +110,25 @@ function User(props) {
 
 					<div className='ms-4'>
 						<h2 className='border-bottom'>{props.user.firstName} {props.user.lastName}</h2>
-						<h5>Read: {interests.books.length} books</h5>
-						<h5>Watched: {interests.movies.length} movies</h5>
-						<h5>Listened: {interests.music.length} tracks</h5> <br/>
+						{interests.books.length > 0 && <h5>Read: {interests.books.length} books</h5>}
+						{interests.movies.length > 0 && <h5>Watched: {interests.movies.length} movies</h5>}
+						{interests.music.length > 0 && <h5>Listened: {interests.music.length} tracks</h5>} <br/>
 						<span className='text-muted'>Registered: 2 months ago</span>
 					</div>
 				</div>
 
 				<div className='pt-4 ps-4'>
 					<div className='ps-10 border border-1 border-dark rounded ps-4 pt-3 bg-light'>
-						<h3>MUSIC</h3>
+						{interests.music.length + interests.books.length + interests.movies.length === 0 && <h6 className=''>No items</h6>}
+						{interests.music.length > 0 && <h4>MUSIC</h4> }
 						{interestList(interests.music)}
 						
 						<div className='border-bottom mt-4'></div>					
-						<h3 className=''>MOVIES</h3>
+						{interests.movies.length > 0 && <h4 className=''>MOVIES</h4>}
 						{interestList(interests.movies)}
 						
 						<div className='border-bottom mt-4'></div>					
-						<h3>BOOKS</h3>
+						{interests.books.length > 0 && <h4>BOOKS</h4>}
 						{interestList(interests.books)}
 					</div>
 				</div>

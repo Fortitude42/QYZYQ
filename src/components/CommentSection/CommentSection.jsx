@@ -1,6 +1,6 @@
 import React , {useEffect, useState} from 'react'
 import axios from 'axios';
-import { getCurrentUser } from '../../Services/UserInfo.js';
+import { getCurrentUser } from '../../Services/UserService.js';
 import SingleComment from '../../components/SingleComment/SingleComment';
 import './CommentSection.css'
 import { useNavigate } from 'react-router-dom'

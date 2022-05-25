@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { loginUser, logoutUser } from '../../Services/Auth.js'
 import { useNavigate } from 'react-router-dom'
-import { getCurrentUser } from '../../Services/UserInfo.js';
+import { getCurrentUser } from '../../Services/UserService.js';
 import './Login.css'
 
 function LoginForm() {

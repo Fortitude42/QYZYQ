@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import './SingleComment.css'
-import { findUserById } from '../../Services/UserInfo';
+import { findUserById } from '../../Services/UserService';
 
 function SingleComment(props) {
     const [currentUser, setCurrentUser] = useState({

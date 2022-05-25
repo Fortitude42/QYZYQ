@@ -10,8 +10,7 @@ async function getCurrentUser(){
 
 async function findUserById(id) {    
     const res = await fetch("http://localhost:5000/users/getById/" + id);
-    return await res.json() ;    
-    
+    return await res.json();
 }
 
 

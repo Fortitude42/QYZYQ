@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import './Navbar.css';
 import 'bootstrap/dist/css/bootstrap.css'
-import { getCurrentUser } from '../../Services/UserInfo.js';
+import { getCurrentUser } from '../../Services/UserService.js';
 
 function Navbar() {      
   const [currentUser, setCurrentUser] = useState({

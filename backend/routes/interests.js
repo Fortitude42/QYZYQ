@@ -32,6 +32,11 @@ router.route('/').get((req, res) => {
 		.catch(err => res.status(400).json('Error: ' + err));
 })
 
+router.route('/getById/:id').get((req, res) => {
+	Interest.findById(req.params.id)
+		.then(interest => res.json(interest))
+		.catch(err => res.status(400).json('Error: ' + err));
+}) 
 
 router.route('/add').post(upload.single('image'), (req, res) => {		
 	const newInterest = new Interest({
