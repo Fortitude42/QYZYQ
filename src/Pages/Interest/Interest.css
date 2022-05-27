@@ -1,7 +1,42 @@
+.w-10 {
+	width: 10%;
+}
+.w-40 {
+	width: 40%;
+}
+
+.w-45 {
+	width: 45%;
+}
+
+.d-b-l{/*distance between lines*/
+	line-height: 4pt;
+}
+
+.w-90 {
+	width: 90%;
+}
+
 .w-30{
 	width: 30%;
 }
 
 .break {
 	white-space: pre-line;
+}
+
+.bg-gray-hover:hover{
+	background-color: #A8A8A8;
+}
+
+.review-hover:hover{
+	background-color: #64AFE0;
+}
+
+.h-75p{
+	height: 75px;
+}
+
+.cursor-pointer{
+	cursor: pointer
 }

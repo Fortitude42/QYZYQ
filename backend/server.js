@@ -30,6 +30,9 @@ app.use('/comments', commentRouter);
 const userInterestRelationRouter = require('./routes/userInterestRelations');
 app.use('/userInterestRelations', userInterestRelationRouter)
 
+const userInterestRatingRouter = require('./routes/userInterestRating');
+app.use('/userInterestRatings', userInterestRatingRouter)
+
 app.listen(port, () => {
 	console.log(`Server is running on port : ${port}`);
 });
