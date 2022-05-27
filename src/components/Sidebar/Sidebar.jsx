@@ -8,13 +8,7 @@ function Sidebar() {
             <ul className="sidebar-nav">
                 <li className="mt-4">
                     <a href="/create-interest" className="">Create Interest</a>
-                </li>
-                <li>
-                    <a href="/login">Login</a>
-                </li>
-                <li>
-                    <a href="/register">Register</a>
-                </li>
+                </li>                
 
                 {/* todo remove */}
                 <li>

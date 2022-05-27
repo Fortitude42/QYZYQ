@@ -33,8 +33,49 @@ async function addInterestToUser(userId, interestId) {
 }
 
 async function deleteInterestFromUser(userId, interestId) {
-	axios.delete("http://localhost:5000/userInterestRelations/deleteByUserIdAndByInterestId/" + userId + '/' + interestId);
-	console.log("http://localhost:5000/userInterestRelations/deleteByUserIdAndByInterestId/" + userId + '/' + interestId);
+	axios.delete("http://localhost:5000/userInterestRelations/deleteByUserIdAndByInterestId/" + userId + '/' + interestId);	
 }
 
-export { findInterestById, findInterestsByUserId, isThereUserInterestRelation, addInterestToUser, deleteInterestFromUser };
+
+async function getScoresByInterestId(interestId) {
+	const uirs = await axios.get("http://localhost:5000/userInterestRatings/getByInterestId/" + interestId)
+		.then(response => response.data)		
+		.catch((error) => console.log(error));
+
+	return {
+		reviewCount: uirs.length,
+		scoreSum: uirs.reduce((sum, current) => sum + current.score, 0),
+	}
+}
+
+async function getScoreByUserIdAndByInterestId(userId, interestId) {
+	const uirs = await axios.get("http://localhost:5000/userInterestRatings/getByUserIdAndByInterestId/" + userId + '/' + interestId)
+		.then(response => response.data)
+		.catch((error) => console.log(error));			
+
+	if (uirs.length === 0)
+		return null;
+
+	return uirs[0].score;
+}
+
+async function addUserInterestRating(userId, interestId, score) {
+	axios.post("http://localhost:5000/userInterestRatings/add/", {
+		"userId": userId,
+		"interestId": interestId,
+		"score": score,
+	})
+}
+
+async function updateScoreByUserIdAndByInterestId(userId, interestId, score) {
+	axios.post("http://localhost:5000/userInterestRatings/updateScoreByUserIdAndByInterestId/" + userId + '/' + interestId, {		
+		"score": score,
+	})
+}
+
+async function deleteUserInterestRating(userId, interestId) {
+	axios.delete("http://localhost:5000/userInterestRatings/deleteByUserIdAndByInterestId/" + userId + '/' + interestId);	
+}
+
+export { findInterestById, findInterestsByUserId, isThereUserInterestRelation, addInterestToUser, deleteInterestFromUser,
+	getScoresByInterestId, getScoreByUserIdAndByInterestId, addUserInterestRating, updateScoreByUserIdAndByInterestId, deleteUserInterestRating };
