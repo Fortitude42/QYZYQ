@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import './Interest.css';
-import axios from 'axios';
 import CommentSection from '../../components/CommentSection/CommentSection';
 import { getCurrentUser } from '../../Services/UserService'; 
-import { isThereUserInterestRelation,  addInterestToUser, deleteInterestFromUser, 
+import { useNavigate } from 'react-router-dom';
+import { findCommentsByInterestId,
+	 			isThereUserInterestRelation,  addInterestToUser, deleteInterestFromUser, 
 				getScoresByInterestId, getScoreByUserIdAndByInterestId, deleteUserInterestRating, addUserInterestRating } from '../../Services/InterestService';
 
 function Interest(props) {	
@@ -25,8 +26,14 @@ function Interest(props) {
 	const [currentUser, setCurrentUser] = useState({
     isLoggedIn: false,
   });
+	const navigate = useNavigate();
+
 
 	function handleAddInterestClick(e) {
+		if (!currentUser.isLoggedIn) {
+			navigate('/login')
+			return;
+		}
 		addInterestToUser(currentUser.id, props.interest._id);
 		window.location.reload();
 	}
@@ -48,9 +55,14 @@ function Interest(props) {
 		await setInterestAddedToCurrentUser(user.isLoggedIn && (await isThereUserInterestRelation(user.id, props.interest._id)));				
 		await setInterestRating(await getScoresByInterestId(props.interest._id));		
 		await setCurrentUserScore(await getScoreByUserIdAndByInterestId(user.id, props.interest._id));
+		await setCommentList(await findCommentsByInterestId(props.interest._id));		
   }
 
-	function handleNewReviewScoreClick(newReviewScore) {
+	function handleNewReviewScoreClick(newReviewScore) { 
+		if (!currentUser.isLoggedIn) {
+			navigate('/login')
+			return;
+		}
 		addUserInterestRating(currentUser.id, props.interest._id, newReviewScore);
 		window.location.reload();
 	}
@@ -66,6 +78,7 @@ function Interest(props) {
 		deleteUserInterestRating(currentUser.id, props.interest._id);
 		window.location.reload();
 	}
+
 	function getReviewSelectConent(){				
 		const res = [];
 		const minRate = 1, maxRate = 10;
@@ -78,10 +91,7 @@ function Interest(props) {
 	}
 
 	useEffect(() => {										
-		setValues();
-		axios.get('http://localhost:5000/comments/getComments/' + props.interest._id)
-			.then(response => {setCommentList(response.data)})
-			.catch((error) => console.log(error));
+		setValues();				
 	}, [])
 
 	return (				

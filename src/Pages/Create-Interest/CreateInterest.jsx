@@ -1,7 +1,8 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './CreateInterest.css'
 import { useNavigate } from "react-router-dom";
+import { getCurrentUser } from '../../Services/UserService.js';
 
 function CreateInterest() {	
 	const [interest, setInterest] = useState({
@@ -21,7 +22,17 @@ function CreateInterest() {
 
 	const navigate = useNavigate();
 	
+	const goToLoginPageIfNotLoggedIn = async() => {
+		const currentUser = await getCurrentUser();
+		if (!currentUser.isLoggedIn) {            
+				navigate('/login/');
+				window.location.reload();
+		}
+	}
 
+	useEffect(() => {        
+		goToLoginPageIfNotLoggedIn();
+	}, [])
 
 	function handleNameChange(event) {				
 		setInterest({...interest, name: event.target.value})

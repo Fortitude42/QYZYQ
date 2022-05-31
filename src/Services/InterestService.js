@@ -5,6 +5,14 @@ async function findInterestById(id) {
 	return await res.json() ;        
 }
 
+
+async function findCommentsByInterestId(interestId) {
+	const comments = await axios.get('http://localhost:5000/comments/getComments/' + interestId)
+			.then(response => response.data)
+			.catch((error) => console.log(error));
+	return comments;
+}
+
 async function findInterestsByUserId(userId) {
   const uirs = await axios.get("http://localhost:5000/userInterestRelations/getByUserId/" + userId)
 		.then(response => response.data)		
@@ -77,5 +85,6 @@ async function deleteUserInterestRating(userId, interestId) {
 	axios.delete("http://localhost:5000/userInterestRatings/deleteByUserIdAndByInterestId/" + userId + '/' + interestId);	
 }
 
-export { findInterestById, findInterestsByUserId, isThereUserInterestRelation, addInterestToUser, deleteInterestFromUser,
+export { findCommentsByInterestId,
+	findInterestById, findInterestsByUserId, isThereUserInterestRelation, addInterestToUser, deleteInterestFromUser,
 	getScoresByInterestId, getScoreByUserIdAndByInterestId, addUserInterestRating, updateScoreByUserIdAndByInterestId, deleteUserInterestRating };
