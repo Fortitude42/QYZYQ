@@ -29,7 +29,7 @@ function LoginForm() {
 
     useEffect(() => {        
         goToUserPageIfLoggedIn();
-    })
+    }, [])
 
     return (
         <form className='position-relative' onSubmit={submitHandler}>
