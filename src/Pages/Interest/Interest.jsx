@@ -8,7 +8,7 @@ import { findCommentsByInterestId,
 				getScoresByInterestId, getScoreByUserIdAndByInterestId, deleteUserInterestRating, addUserInterestRating } from '../../Services/InterestService';
 
 function Interest(props) {	
-	const [commentList, setCommentList] = useState([]);		
+	const [commentList, setCommentList] = useState([]);
 	const updateComment =  (newComment) => {				
 		setCommentList(commentList.concat(newComment))		
 	}
@@ -145,7 +145,7 @@ function Interest(props) {
 
 				<div className="ms-4 border border-1 rounded border-dark ps-4 pe-4 w-50 bg-light pb-4">
 					<h1 className="mt-4">{props.interest.name}</h1>
-					<h5>By: {props.interest.author}</h5>						
+					<h5>By: <a href={'http://localhost:3000/authors/' + encodeURI(props.interest.author)}> {props.interest.author} </a></h5>						
 					<h3>About {props.interest.type}</h3>
 					<span className='break'> {props.interest.description}</span>
 				</div>
