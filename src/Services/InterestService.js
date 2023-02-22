@@ -2,7 +2,7 @@ import axios from "axios";
 
 async function findInterestById(id) {    
 	const res = await fetch("http://localhost:5000/interests/getById/" + id);
-	return await res.json() ;        
+	return await res.json() ;
 }
 
 
@@ -85,6 +85,11 @@ async function deleteUserInterestRating(userId, interestId) {
 	axios.delete("http://localhost:5000/userInterestRatings/deleteByUserIdAndByInterestId/" + userId + '/' + interestId);	
 }
 
-export { findCommentsByInterestId,
+async function findInterestsByAuthor(author){
+	const res = await fetch("http://localhost:5000/interests/getByAuthor/" + encodeURI(author));
+	return await res.json() ;
+}
+
+export { findCommentsByInterestId, findInterestsByAuthor,
 	findInterestById, findInterestsByUserId, isThereUserInterestRelation, addInterestToUser, deleteInterestFromUser,
 	getScoresByInterestId, getScoreByUserIdAndByInterestId, addUserInterestRating, updateScoreByUserIdAndByInterestId, deleteUserInterestRating };

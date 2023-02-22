@@ -6,6 +6,7 @@ import { Routes, Route} from "react-router-dom";
 import Navbar from './components/Navbar/Navbar';
 import Home from './Pages/Home/Home.jsx';
 import Login from './Pages/Login/Login.jsx'
+import Author from './Pages/Author/Author.jsx'
 import Register from './Pages/Register/Register.jsx'
 import Interest from "./Pages/Interest/Interest";
 import User from "./Pages/User/User";
@@ -29,6 +30,16 @@ export default class App extends Component {
 		for (let inter of this.state.interests) {
 			let path = "/interests/" + inter._id;
 			res.push(<Route key= {path} path={path} element={<Interest interest={inter} />}/>)
+		}
+
+		return res;
+	}
+
+	authorList() {
+		let res = []
+		for (let inter of this.state.interests) {
+			let path = "/authors/" + encodeURI(inter.author);			
+			res.push(<Route key= {path} path={path} element={<Author author={inter.author} />}/>)
 		}
 
 		return res;
@@ -71,10 +82,11 @@ export default class App extends Component {
 							<Route path="/movie" element={<Home types={['movie']}/>} key={'home'} />
 							<Route path="/music" element={<Home types={['music']}/>} key={'home'} />
 							<Route path="/login" element={<Login />} key = 'login'/>
-							<Route path="/register" element={<Register />} key = 'register' />
+							<Route path="/register" element={<Register />} key = 'register' />							
 							<Route path="/create-interest" element={<CreateInterest	/>} key='create-interest' />
 							{this.interestList()}
 							{this.usersList()}
+							{this.authorList()}
 						</Routes>
 					</div>
 				</div>

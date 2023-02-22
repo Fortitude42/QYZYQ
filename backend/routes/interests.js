@@ -38,6 +38,12 @@ router.route('/getById/:id').get((req, res) => {
 		.catch(err => res.status(400).json('Error: ' + err));
 }) 
 
+router.route("/getByAuthor/:author").get((req, res) => {
+	Interest.find({"author": decodeURI(req.params.author)})
+		.then(uirs => res.json(uirs))
+		.catch(err => res.status(400).json('Error: ' + err));
+})
+
 router.route('/add').post(upload.single('image'), (req, res) => {		
 	const newInterest = new Interest({
 		name: req.body.name,
